@@ -19,6 +19,7 @@ tags:        [linux]
 - Windows 10 版本 2004 及更高版本（内部版本 19041 及更高版本）或 Windows 11。可以使用 winver 命令查看系统版本。
 - 请启用虚拟机平台 Windows 功能并确保在 BIOS 中启用虚拟化。计算机启动的时候 F2 进入BIOS 设置，启用VT。
 - 控制面版，查看方式可选择大图标，在点击程序与功能—>**启用或关闭Windows功能**，勾选 「Hyper-V」和 「适用于 Windows 的 Linux 子系统」。如果没有Hyper-V这一项，请查看文章win10家庭中文版安装`Hyper-V`。（🚨 注意：有些软件可能会关闭这些选项，例如模拟器类软件）
+- 技巧：如果仍然无法安装wsl，可以在Microsoft Store里面搜索Ubuntu安装，一般也能强制打开WSL的安装。
 
 ```bash
 # 管理员身份运行开启功能
@@ -28,19 +29,19 @@ dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux 
 wsl --list --online
 
 # Ubuntu-20.04
-wsl --install -d Ubuntu-22.04
+wsl --install -d Ubuntu-24.04
 
 # 查看本地安装的版本
 wsl -l -v
 
 # 卸载指定版本
-wsl --unregister Ubuntu-22.04
+wsl --unregister Ubuntu-24.04
 
 # 进入默认的环境
 wsl
 
 # 进入指定版本的环境
-wsl -d Ubuntu-22.04
+wsl -d Ubuntu-24.04
 
 # 切换到WSL2，转换需要几分钟时间，然后重启计算机就可以了。
 wsl --set-version <linux fronm above> 2
