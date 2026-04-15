@@ -20,6 +20,7 @@ tags:        [linux]
 - 请启用虚拟机平台 Windows 功能并确保在 BIOS 中启用虚拟化。计算机启动的时候 F2 进入BIOS 设置，启用VT。
 - 控制面版，查看方式可选择大图标，在点击程序与功能—>**启用或关闭Windows功能**，勾选 「Hyper-V」和 「适用于 Windows 的 Linux 子系统」。如果没有Hyper-V这一项，请查看文章win10家庭中文版安装`Hyper-V`。（🚨 注意：有些软件可能会关闭这些选项，例如模拟器类软件）
 - 技巧：如果仍然无法安装wsl，可以在Microsoft Store里面搜索Ubuntu安装，一般也能强制打开WSL的安装。
+- 为方便编辑文本文件，强烈推荐安装`gedit`：`sudo apt install gedit`。
 
 ```bash
 # 管理员身份运行开启功能
@@ -74,6 +75,9 @@ sudo apt update
 参考：[Get started with Linux using WSL](https://learn.microsoft.com/en-us/windows/wsl/tutorials/linux)
 
 ```bash
+# 安装gedit，方便以GUI方式编辑文本文件，非常方便！
+sudo apt install gedit
+
 # 更新
 sudo apt-get update
 sudo apt-get upgrade
