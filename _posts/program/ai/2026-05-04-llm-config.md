@@ -11,16 +11,6 @@ tags:		[ai]
 
 
 
-| 厂商           | baseUrl | 模型id                                | 相关链接                                  |
-| -------------- | ------- | ------------------------------------- | ----------------------------------------- |
-|                |         | deepseek-v4-pro<br/>deepseek-v4-flash |                                           |
-| 智普国际版     |         |                                       |                                           |
-| 智普国内版     |         |                                       |                                           |
-| 英伟达（免费） |         |                                       | https://build.nvidia.com/explore/discover |
-|                |         |                                       |                                           |
-|                |         |                                       |                                           |
-|                |         |                                       |                                           |
-
 ## deepseek
 
 官方模型&价格：https://api-docs.deepseek.com/zh-cn/quick_start/pricing
