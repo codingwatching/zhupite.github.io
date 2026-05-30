@@ -503,6 +503,18 @@ document.addEventListener('DOMContentLoaded', function() {
         });
       }
     });
+
+    // ===== 移动端分类子菜单 =====
+    var mobileTriggers = document.querySelectorAll('.mobile-nav-cat-trigger');
+    mobileTriggers.forEach(function(trigger) {
+      trigger.addEventListener('click', function(e) {
+        e.stopPropagation();
+        var wrap = this.closest('.mobile-nav-cat-wrap');
+        if (!wrap) return;
+        var isOpen = wrap.classList.toggle('open');
+        this.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      });
+    });
   })();
 
 });

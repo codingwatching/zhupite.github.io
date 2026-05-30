@@ -233,7 +233,40 @@
         <div class="mobile-nav-inner">
           {% for nav in site.navs %}
           {% if nav.label == "分类" %}
-          <a href="{{ site.url }}{{ nav.href }}" class="mobile-nav-item{% if page.url contains '/categories/' %} active{% endif %}">{{ nav.label }}</a>
+          <div class="mobile-nav-cat-wrap">
+            <button class="mobile-nav-item mobile-nav-cat-trigger{% if page.url contains '/categories/' %} active{% endif %}" aria-expanded="false">
+              分类
+              <svg class="mobile-cat-arrow" width="10" height="6" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M1 1l4 4 4-4"/></svg>
+            </button>
+            <div class="mobile-cat-sub">
+              {%- assign cat_meta = "dev|💻|编程开发,reads|📖|读书笔记,thinking|💭|所思所想,sec|🔒|安全研究,travel|🗺️|行走记录,life|🌱|生活记录,tool|🛠️|工具推荐,invest|📈|理财投资,web|🌐|网页技术,android|🤖|安卓开发,java|☕|Java编程,cpp|⚙️|C/C++,rust|🦀|Rust,docker|🐳|容器,flutter|📱|Flutter,kotlin|💜|Kotlin,ai|🤖|人工智能" | split: "," -%}
+              {%- for category in site.categories -%}
+                {%- assign cat_key = category[0] | downcase -%}
+                {%- assign cat_icon = "📁" -%}
+                {%- assign cat_brief = "" -%}
+                {%- for entry in cat_meta -%}
+                  {%- assign parts = entry | split: "|" -%}
+                  {%- assign meta_key = parts[0] | strip -%}
+                  {%- if meta_key == cat_key -%}
+                    {%- assign cat_icon = parts[1] | strip -%}
+                    {%- assign cat_brief = parts[2] | strip -%}
+                    {%- break -%}
+                  {%- endif -%}
+                {%- endfor -%}
+                {% include category-color.liquid cat_name=cat_key %}
+                <a href="https://zhupite.com/categories/#{{ category[0] }}" class="mobile-cat-item" data-category="{{ category[0] }}">
+                  <span class="mobile-cat-item-icon mobile-cat-icon-{{ cat_color }}">{{ cat_icon }}</span>
+                  <span class="mobile-cat-item-info">
+                    <span class="mobile-cat-item-name">{{ category[0] }}</span>
+                    {% if cat_brief != "" %}
+                    <span class="mobile-cat-item-brief">{{ cat_brief }}</span>
+                    {% endif %}
+                  </span>
+                  <span class="mobile-cat-item-count">{{ category[1].size }}</span>
+                </a>
+              {%- endfor -%}
+            </div>
+          </div>
           {% else %}
           <a href="{{ site.url }}{{ nav.href }}" class="mobile-nav-item{% if page.menu == nav.label or (nav.href == '/' and (page.url == '/' or page.url contains '/index.html')) or (nav.href != '/' and page.url contains nav.href) %} active{% endif %}">{{ nav.label }}</a>
           {% endif %}
