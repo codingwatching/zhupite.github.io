@@ -457,4 +457,52 @@ document.addEventListener('DOMContentLoaded', function() {
       });
   })();
 
+  // ===== 8. 分类下拉菜单 =====
+  (function setupCategoryDropdown() {
+    var triggers = document.querySelectorAll('.header-nav-dropdown-trigger');
+    if (!triggers.length) return;
+
+    triggers.forEach(function(trigger) {
+      trigger.addEventListener('click', function(e) {
+        e.stopPropagation();
+        var dropdown = this.closest('.header-nav-dropdown');
+        if (!dropdown) return;
+
+        // Close all other dropdowns first
+        document.querySelectorAll('.header-nav-dropdown.open').forEach(function(d) {
+          if (d !== dropdown) {
+            d.classList.remove('open');
+            var t = d.querySelector('.header-nav-dropdown-trigger');
+            if (t) t.setAttribute('aria-expanded', 'false');
+          }
+        });
+
+        var isOpen = dropdown.classList.toggle('open');
+        this.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      });
+    });
+
+    // Close dropdown on outside click
+    document.addEventListener('click', function(e) {
+      document.querySelectorAll('.header-nav-dropdown.open').forEach(function(dropdown) {
+        if (!dropdown.contains(e.target)) {
+          dropdown.classList.remove('open');
+          var t = dropdown.querySelector('.header-nav-dropdown-trigger');
+          if (t) t.setAttribute('aria-expanded', 'false');
+        }
+      });
+    });
+
+    // Close dropdown on Escape
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        document.querySelectorAll('.header-nav-dropdown.open').forEach(function(dropdown) {
+          dropdown.classList.remove('open');
+          var t = dropdown.querySelector('.header-nav-dropdown-trigger');
+          if (t) t.setAttribute('aria-expanded', 'false');
+        });
+      }
+    });
+  })();
+
 });

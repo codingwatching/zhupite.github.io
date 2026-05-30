@@ -168,7 +168,48 @@
 
         <nav class="header-nav-desktop" aria-label="主导航">
           {% for nav in site.navs %}
+          {% if nav.label == "分类" %}
+          <div class="header-nav-dropdown">
+            <button class="header-nav-item header-nav-dropdown-trigger{% if page.url contains '/categories/' %} active{% endif %}" title="分类" aria-haspopup="true" aria-expanded="false">
+              分类
+              <svg class="dropdown-arrow" width="10" height="6" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M1 1l4 4 4-4"/></svg>
+            </button>
+            <div class="dropdown-menu" role="menu">
+              {%- comment -%}
+                分类元数据：icon|名称|简要描述(≤10字)
+                若无匹配，默认用 📁 + 分类名
+              {%- endcomment -%}
+              {%- assign cat_meta = "dev|💻|编程开发,reads|📖|读书笔记,thinking|💭|所思所想,sec|🔒|安全研究,travel|🗺️|行走记录,life|🌱|生活记录,tool|🛠️|工具推荐,invest|📈|理财投资,web|🌐|网页技术,android|🤖|安卓开发,java|☕|Java编程,cpp|⚙️|C/C++,rust|🦀|Rust,docker|🐳|容器,flutter|📱|Flutter,kotlin|💜|Kotlin,ai|🤖|人工智能" | split: "," -%}
+              {%- for category in site.categories -%}
+                {%- assign cat_key = category[0] | downcase -%}
+                {%- assign cat_icon = "📁" -%}
+                {%- assign cat_brief = "" -%}
+                {%- for entry in cat_meta -%}
+                  {%- assign parts = entry | split: "|" -%}
+                  {%- assign meta_key = parts[0] | strip -%}
+                  {%- if meta_key == cat_key -%}
+                    {%- assign cat_icon = parts[1] | strip -%}
+                    {%- assign cat_brief = parts[2] | strip -%}
+                    {%- break -%}
+                  {%- endif -%}
+                {%- endfor -%}
+                {% include category-color.liquid cat_name=cat_key %}
+                <a href="https://zhupite.com/categories/#{{ category[0] }}" class="dropdown-item" role="menuitem" data-category="{{ category[0] }}">
+                  <span class="dropdown-item-icon dropdown-icon-{{ cat_color }}">{{ cat_icon }}</span>
+                  <span class="dropdown-item-info">
+                    <span class="dropdown-item-name">{{ category[0] }}</span>
+                    {% if cat_brief != "" %}
+                    <span class="dropdown-item-brief">{{ cat_brief }}</span>
+                    {% endif %}
+                  </span>
+                  <span class="dropdown-item-count">{{ category[1].size }}</span>
+                </a>
+              {%- endfor -%}
+            </div>
+          </div>
+          {% else %}
           <a href="{{ site.url }}{{ nav.href }}" class="header-nav-item{% if page.menu == nav.label or (nav.href == '/' and (page.url == '/' or page.url contains '/index.html')) or (nav.href != '/' and page.url contains nav.href) %} active{% endif %}" title="{{ nav.label }}">{{ nav.label }}</a>
+          {% endif %}
           {% endfor %}
         </nav>
 
@@ -191,7 +232,11 @@
       <nav class="mobile-nav-wrapper" aria-label="移动端主导航">
         <div class="mobile-nav-inner">
           {% for nav in site.navs %}
+          {% if nav.label == "分类" %}
+          <a href="{{ site.url }}{{ nav.href }}" class="mobile-nav-item{% if page.url contains '/categories/' %} active{% endif %}">{{ nav.label }}</a>
+          {% else %}
           <a href="{{ site.url }}{{ nav.href }}" class="mobile-nav-item{% if page.menu == nav.label or (nav.href == '/' and (page.url == '/' or page.url contains '/index.html')) or (nav.href != '/' and page.url contains nav.href) %} active{% endif %}">{{ nav.label }}</a>
+          {% endif %}
           {% endfor %}
         </div>
       </nav>
