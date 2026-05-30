@@ -25,4 +25,34 @@ layout: default
     </div>
     {% endfor %}
   </div>
+
+  <noscript>
+    <style>.category-group { display: block !important; }</style>
+  </noscript>
+
+  <script>
+  (function(){
+    var hash = window.location.hash;
+    if (!hash) return;
+
+    var targetId = hash.substring(1);
+    var groups = document.querySelectorAll('.category-group');
+    var found = false;
+    for (var i = 0; i < groups.length; i++) {
+      var h2 = groups[i].querySelector('h2');
+      if (h2 && h2.id === targetId) {
+        groups[i].style.display = 'block';
+        found = true;
+      } else {
+        groups[i].style.display = 'none';
+      }
+    }
+    if (!found) {
+      for (var i = 0; i < groups.length; i++) {
+        groups[i].style.display = 'block';
+      }
+      return;
+    }
+  })();
+  </script>
 </div>
