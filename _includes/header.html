@@ -175,24 +175,15 @@
               <svg class="dropdown-arrow" width="10" height="6" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M1 1l4 4 4-4"/></svg>
             </button>
             <div class="dropdown-menu" role="menu">
-              {%- comment -%}
-                分类元数据：icon|名称|简要描述(≤10字)
-                若无匹配，默认用 📁 + 分类名
-              {%- endcomment -%}
-              {%- assign cat_meta = "dev|💻|编程开发,reads|📖|读书笔记,thinking|💭|所思所想,sec|🔒|安全研究,travel|🗺️|行走记录,life|🌱|生活记录,tool|🛠️|工具推荐,invest|📈|理财投资,web|🌐|网页技术,android|🤖|安卓开发,java|☕|Java编程,cpp|⚙️|C/C++,rust|🦀|Rust,docker|🐳|容器,flutter|📱|Flutter,kotlin|💜|Kotlin,ai|🤖|人工智能" | split: "," -%}
               {%- for category in site.categories -%}
                 {%- assign cat_key = category[0] | downcase -%}
                 {%- assign cat_icon = "📁" -%}
                 {%- assign cat_brief = "" -%}
-                {%- for entry in cat_meta -%}
-                  {%- assign parts = entry | split: "|" -%}
-                  {%- assign meta_key = parts[0] | strip -%}
-                  {%- if meta_key == cat_key -%}
-                    {%- assign cat_icon = parts[1] | strip -%}
-                    {%- assign cat_brief = parts[2] | strip -%}
-                    {%- break -%}
-                  {%- endif -%}
-                {%- endfor -%}
+                {%- assign cat_data = site.data.categories | where: "key", cat_key | first -%}
+                {%- if cat_data -%}
+                  {%- assign cat_icon = cat_data.icon -%}
+                  {%- assign cat_brief = cat_data.brief -%}
+                {%- endif -%}
                 {% include category-color.liquid cat_name=cat_key %}
                 <a href="https://zhupite.com/categories/#{{ category[0] }}" class="dropdown-item" role="menuitem" data-category="{{ category[0] }}">
                   <span class="dropdown-item-icon dropdown-icon-{{ cat_color }}">{{ cat_icon }}</span>
@@ -239,20 +230,15 @@
               <svg class="mobile-cat-arrow" width="10" height="6" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M1 1l4 4 4-4"/></svg>
             </button>
             <div class="mobile-cat-sub">
-              {%- assign cat_meta = "dev|💻|编程开发,reads|📖|读书笔记,thinking|💭|所思所想,sec|🔒|安全研究,travel|🗺️|行走记录,life|🌱|生活记录,tool|🛠️|工具推荐,invest|📈|理财投资,web|🌐|网页技术,android|🤖|安卓开发,java|☕|Java编程,cpp|⚙️|C/C++,rust|🦀|Rust,docker|🐳|容器,flutter|📱|Flutter,kotlin|💜|Kotlin,ai|🤖|人工智能" | split: "," -%}
               {%- for category in site.categories -%}
                 {%- assign cat_key = category[0] | downcase -%}
                 {%- assign cat_icon = "📁" -%}
                 {%- assign cat_brief = "" -%}
-                {%- for entry in cat_meta -%}
-                  {%- assign parts = entry | split: "|" -%}
-                  {%- assign meta_key = parts[0] | strip -%}
-                  {%- if meta_key == cat_key -%}
-                    {%- assign cat_icon = parts[1] | strip -%}
-                    {%- assign cat_brief = parts[2] | strip -%}
-                    {%- break -%}
-                  {%- endif -%}
-                {%- endfor -%}
+                {%- assign cat_data = site.data.categories | where: "key", cat_key | first -%}
+                {%- if cat_data -%}
+                  {%- assign cat_icon = cat_data.icon -%}
+                  {%- assign cat_brief = cat_data.brief -%}
+                {%- endif -%}
                 {% include category-color.liquid cat_name=cat_key %}
                 <a href="https://zhupite.com/categories/#{{ category[0] }}" class="mobile-cat-item" data-category="{{ category[0] }}">
                   <span class="mobile-cat-item-icon mobile-cat-icon-{{ cat_color }}">{{ cat_icon }}</span>

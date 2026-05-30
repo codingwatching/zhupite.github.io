@@ -1,0 +1,73 @@
+# 分类元数据配置
+# key: 分类名（对应 _posts/ 下的子目录名和文章 frontmatter 中的 categories）
+# icon: Emoji 图标
+# brief: 简要描述（≤10字）
+# 若某分类不在本列表中，下拉菜单会用默认图标 📁 且不显示描述
+
+- key: dev
+  icon: 💻
+  brief: 编程开发
+
+- key: reads
+  icon: 📖
+  brief: 读书笔记
+
+- key: thinking
+  icon: 💭
+  brief: 所思所想
+
+- key: sec
+  icon: 🔒
+  brief: 安全研究
+
+- key: travel
+  icon: 🗺️
+  brief: 行走记录
+
+- key: life
+  icon: 🌱
+  brief: 生活记录
+
+- key: tool
+  icon: 🛠️
+  brief: 工具推荐
+
+- key: invest
+  icon: 📈
+  brief: 理财投资
+
+- key: web
+  icon: 🌐
+  brief: 网页技术
+
+- key: android
+  icon: 🤖
+  brief: 安卓开发
+
+- key: java
+  icon: ☕
+  brief: Java编程
+
+- key: cpp
+  icon: ⚙️
+  brief: C/C++
+
+- key: rust
+  icon: 🦀
+  brief: Rust
+
+- key: docker
+  icon: 🐳
+  brief: 容器
+
+- key: flutter
+  icon: 📱
+  brief: Flutter
+
+- key: kotlin
+  icon: 💜
+  brief: Kotlin
+
+- key: ai
+  icon: 🤖
+  brief: 人工智能
