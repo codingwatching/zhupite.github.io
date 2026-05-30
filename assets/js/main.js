@@ -509,8 +509,8 @@ document.addEventListener('DOMContentLoaded', function() {
     mobileTriggers.forEach(function(trigger) {
       trigger.addEventListener('click', function(e) {
         e.stopPropagation();
-        var wrap = this.closest('.mobile-nav-cat-wrap');
-        if (!wrap) return;
+        var wrap = this.nextElementSibling;
+        if (!wrap || !wrap.classList.contains('mobile-nav-cat-wrap')) return;
         var isOpen = wrap.classList.toggle('open');
         this.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
       });
@@ -524,7 +524,7 @@ document.addEventListener('DOMContentLoaded', function() {
         var wrap = this.closest('.mobile-nav-cat-wrap');
         if (!wrap) return;
         wrap.classList.remove('open');
-        var t = wrap.querySelector('.mobile-nav-cat-trigger');
+        var t = document.querySelector('.mobile-nav-cat-trigger');
         if (t) t.setAttribute('aria-expanded', 'false');
       });
     });

@@ -224,11 +224,11 @@
         <div class="mobile-nav-inner">
           {% for nav in site.navs %}
           {% if nav.label == "分类" %}
-          <div class="mobile-nav-cat-wrap">
             <button class="mobile-nav-item mobile-nav-cat-trigger{% if page.url contains '/categories/' %} active{% endif %}" aria-expanded="false">
               分类
               <svg class="mobile-cat-arrow" width="10" height="6" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M1 1l4 4 4-4"/></svg>
             </button>
+          <div class="mobile-nav-cat-wrap">
             <div class="mobile-cat-sub">
               {%- for category in site.categories -%}
                 {%- assign cat_key = category[0] | downcase -%}

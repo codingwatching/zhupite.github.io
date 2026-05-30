@@ -523,8 +523,7 @@ img { max-width: 100%; height: auto; }
 
 /* ===== 移动端分类子菜单 ===== */
 .mobile-nav-cat-wrap {
-  display: inline-flex;
-  flex-direction: column;
+  width: 100%;
 }
 
 .mobile-nav-cat-trigger {
