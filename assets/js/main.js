@@ -530,7 +530,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Close desktop dropdown on category link click
-    document.querySelectorAll('.header-nav-dropdown-panel').forEach(function(panel) {
+    document.querySelectorAll('.dropdown-menu').forEach(function(panel) {
       panel.addEventListener('click', function(e) {
         var link = e.target.closest('a');
         if (!link) return;

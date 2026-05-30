@@ -174,7 +174,7 @@
               分类
               <svg class="dropdown-arrow" width="10" height="6" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M1 1l4 4 4-4"/></svg>
             </button>
-            <div class="dropdown-menu" role="menu">
+            <div class="dropdown-menu">
               {%- for category in site.categories -%}
                 {%- assign cat_key = category[0] | downcase -%}
                 {%- assign cat_icon = "📁" -%}
@@ -185,7 +185,7 @@
                   {%- assign cat_brief = cat_data.brief -%}
                 {%- endif -%}
                 {% include category-color.liquid cat_name=cat_key %}
-                <a href="https://zhupite.com/categories/#{{ category[0] }}" class="dropdown-item" role="menuitem" data-category="{{ category[0] }}">
+                <a href="https://zhupite.com/categories/#{{ category[0] }}" class="dropdown-item" data-category="{{ category[0] }}">
                   <span class="dropdown-item-icon dropdown-icon-{{ cat_color }}">{{ cat_icon }}</span>
                   <span class="dropdown-item-info">
                     <span class="dropdown-item-name">{{ category[0] }}</span>

@@ -35,11 +35,9 @@ layout: default
     function filterByHash() {
       var hash = window.location.hash;
       if (!hash) {
-        // No hash: show all groups
         document.querySelectorAll('.category-group').forEach(function(g) { g.style.display = 'block'; });
         return;
       }
-
       var targetId = hash.substring(1);
       var groups = document.querySelectorAll('.category-group');
       var found = false;
@@ -59,6 +57,20 @@ layout: default
 
     filterByHash();
     window.addEventListener('hashchange', filterByHash);
+
+    // Backup: intercept clicks on dropdown links that target a category hash
+    document.addEventListener('click', function(e) {
+      var link = e.target.closest('a[href*="categories/#"]');
+      if (!link) return;
+      var href = link.getAttribute('href');
+      var hashIdx = href.indexOf('#');
+      if (hashIdx === -1) return;
+      var hash = href.substring(hashIdx);
+      if (hash === window.location.hash) return;
+      // Update URL and filter immediately (backup for hashchange edge cases)
+      window.location.hash = hash;
+      filterByHash();
+    });
   })();
   </script>
 </div>
