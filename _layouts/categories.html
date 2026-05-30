@@ -32,27 +32,33 @@ layout: default
 
   <script>
   (function(){
-    var hash = window.location.hash;
-    if (!hash) return;
+    function filterByHash() {
+      var hash = window.location.hash;
+      if (!hash) {
+        // No hash: show all groups
+        document.querySelectorAll('.category-group').forEach(function(g) { g.style.display = 'block'; });
+        return;
+      }
 
-    var targetId = hash.substring(1);
-    var groups = document.querySelectorAll('.category-group');
-    var found = false;
-    for (var i = 0; i < groups.length; i++) {
-      var h2 = groups[i].querySelector('h2');
-      if (h2 && h2.id === targetId) {
-        groups[i].style.display = 'block';
-        found = true;
-      } else {
-        groups[i].style.display = 'none';
-      }
-    }
-    if (!found) {
+      var targetId = hash.substring(1);
+      var groups = document.querySelectorAll('.category-group');
+      var found = false;
       for (var i = 0; i < groups.length; i++) {
-        groups[i].style.display = 'block';
+        var h2 = groups[i].querySelector('h2');
+        if (h2 && h2.id === targetId) {
+          groups[i].style.display = 'block';
+          found = true;
+        } else {
+          groups[i].style.display = 'none';
+        }
       }
-      return;
+      if (!found) {
+        groups.forEach(function(g) { g.style.display = 'block'; });
+      }
     }
+
+    filterByHash();
+    window.addEventListener('hashchange', filterByHash);
   })();
   </script>
 </div>
